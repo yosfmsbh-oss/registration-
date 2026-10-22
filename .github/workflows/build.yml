@@ -6,6 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q CallRec.zip
+      - run: sed -i 's/8.5.2/8.7.3/' CallRec/build.gradle.kts
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -13,7 +14,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
-      - run: gradle assembleDebug --no-daemon
+      - run: gradle assembleDebug --no-daemon --stacktrace
         working-directory: CallRec
       - uses: actions/upload-artifact@v4
         with:
